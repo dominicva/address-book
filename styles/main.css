@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  /* border: 1px solid teal; */
+}
+
+body {
+  text-align: center;
+  font: 400 14px/22px sans-serif;
+}
+
+.add-contact__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-contact__form > label {
+  align-self: flex-start;
+  text-transform: capitalize;
+}
+
+.add-contact__form > input {
+  height: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-contact__submit-btn {
+  height: 2.5rem;
+}
