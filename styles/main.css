@@ -31,3 +31,12 @@ body {
 .add-contact__submit-btn {
   height: var(--btn-height);
 }
+
+.contact {
+  border: 1px solid tomato;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+}

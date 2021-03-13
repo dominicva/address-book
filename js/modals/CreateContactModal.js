@@ -6,19 +6,26 @@ export default class CreateContactModal {
     this.tag = tag;
     this.cssClasses = cssClasses;
 
+    this.inputIds = {
+      firstName: 'fname',
+      lastName: 'lname',
+      number: 'number',
+      address: 'address',
+    };
+
     this.htmlContent = `
     <form class="add-contact__form">
       <label class="test" for="fname">first name</label>
-      <input type="text" name="fname" id="fname" />
+      <input type="text" name="fname" id="${this.inputIds.firstName}" />
 
       <label for="lname">last name</label>
-      <input type="text" name="lname" id="lname" />
+      <input type="text" name="lname" id="${this.inputIds.lastName}" />
 
       <label for="number">number</label>
-      <input type="tel" name="number" id="number" pattern="^[+]*\d+" />
+      <input type="tel" name="number" id="${this.inputIds.number}" pattern="^[+]*\d+" />
 
       <label for="address">address</label>
-      <input type="text" name="address" id="address" />
+      <input type="text" name="address" id="${this.inputIds.address}" />
       <button class="add-contact__submit-btn" type="submit">
         Create contact
       </button>
@@ -27,13 +34,15 @@ export default class CreateContactModal {
   }
 
   createContact = event => {
-    // arrow function to ensure 'this' is lexically scoped
+    // arrow function to lexically scope 'this' assignment
     event.preventDefault();
 
     const data = this.getInputValues(event);
     const contact = new Contact(data);
 
     contact.render(this.hookId);
+
+    this.clearInputValues();
   };
 
   getInputValues() {
@@ -43,6 +52,12 @@ export default class CreateContactModal {
       number: document.getElementById('number').value,
       address: document.getElementById('address').value,
     };
+  }
+
+  clearInputValues() {
+    for (const inputId in this.inputIds) {
+      document.getElementById(`${this.inputIds[inputId]}`).value = '';
+    }
   }
 
   initEventListener() {
