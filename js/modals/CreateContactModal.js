@@ -1,3 +1,5 @@
+import Contact from '../Contact';
+
 export default class CreateContactModal {
   constructor(hookId, tag, cssClasses) {
     this.hookId = hookId;
@@ -22,6 +24,30 @@ export default class CreateContactModal {
       </button>
     </form>
 `;
+  }
+
+  createContact = event => {
+    // arrow function to ensure 'this' is lexically scoped
+    event.preventDefault();
+
+    const data = this.getInputValues(event);
+    const contact = new Contact(data);
+
+    contact.render(this.hookId);
+  };
+
+  getInputValues() {
+    return {
+      firstName: document.getElementById('fname').value,
+      lastName: document.getElementById('lname').value,
+      number: document.getElementById('number').value,
+      address: document.getElementById('address').value,
+    };
+  }
+
+  initEventListener() {
+    const createContactBtn = document.querySelector('.add-contact__submit-btn');
+    createContactBtn.addEventListener('click', this.createContact);
   }
 
   render() {

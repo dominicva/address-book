@@ -9,6 +9,8 @@ addContactBtn.addEventListener('click', () => {
     'div',
     'add-contact__modal'
   );
+  console.log(createContactModal);
 
   createContactModal.render();
+  createContactModal.initEventListener();
 });
