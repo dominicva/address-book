@@ -69,7 +69,7 @@ input:focus {
 
 .control__heading {
   color: var(--pure-white);
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--monospace);
   font-size: 2rem;
   text-transform: capitalize;
   margin-bottom: var(--distanced-items-margin);
@@ -100,7 +100,6 @@ input:focus {
   overflow: auto;
   background-color: var(--primary-light);
   transform: translateY(-80rem);
-  will-change: transform;
 }
 
 .add-contact__form__heading {
@@ -117,9 +116,9 @@ input:focus {
   flex-direction: column;
   max-width: var(--input-max-width);
   margin: 0 auto var(--section-separator) auto;
-  /* margin-bottom: var(--section-separator); */
   padding: 1rem;
   transform: translateY(-80rem);
+  transition: translateX 0.5s ease;
   animation: slide-in 1s ease-out forwards;
 }
 
@@ -146,7 +145,9 @@ input:focus {
 }
 
 .add-contact__submit-btn,
-.add-contact__cancel-btn {
+.add-contact__cancel-btn,
+.contact__delete__confirm-btn,
+.contact__delete__cancel-btn {
   height: var(--btn-height);
   width: 12rem;
   border-radius: 0.1rem;
@@ -156,7 +157,8 @@ input:focus {
   color: var(--pure-white);
 }
 
-.add-contact__submit-btn:hover {
+.add-contact__submit-btn:hover,
+.contact__delete__cancel-btn:hover {
   background-color: var(--pure-white);
   color: var(--primary-dark);
 }
@@ -166,7 +168,9 @@ input:focus {
 }
 
 .add-contact__submit-btn:hover,
-.add-contact__cancel-btn:hover {
+.add-contact__cancel-btn:hover,
+.contact__delete__confirm-btn:hover,
+.contact__delete__cancel-btn:hover {
   border-radius: 1.5rem;
 }
 
@@ -209,13 +213,20 @@ input:focus {
 .contact {
   display: grid;
   justify-items: flex-start;
-  padding: 1rem;
+  padding: 2rem 1rem 1.5rem 1rem;
   border: 1px solid var(--pure-white);
   color: var(--pure-white);
+  transform: translateY(80rem);
+  animation: slide-in--up 0.5s ease-out 0.25s forwards;
+}
+
+.contact.slide-out--right {
+  transition: transform 0.5s ease;
+  transform: translateX(100rem);
 }
 
 .contact__field {
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--monospace);
   margin-bottom: var(--grouped-items-margin-s);
 }
 
@@ -243,9 +254,61 @@ input:focus {
   margin-bottom: var(--distanced-items-margin);
 }
 
+.contact__delete-btn {
+  height: var(--btn-height--secondary);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: transparent;
+  color: var(--pure-white);
+  border: 1.5px solid var(--pure-white);
+  display: flex;
+  align-items: center;
+  transition: border radius 0.5s ease-out, border 1s ease;
+}
+
+.contact__delete-btn.material-icons {
+  margin: 0;
+}
+
+.contact__delete-btn:hover {
+  border-radius: 1.5rem;
+  border: none;
+}
+
+.modal#confirm-delete {
+  text-align: center;
+  padding: 10rem 2rem 12rem 2rem;
+}
+
+.contact__delete__confirm__heading {
+  color: var(--pure-white);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* .contact__delete__confirm-btn {
+  margin-right: 0.5rem;
+}
+
+.contact__delete__confirm-btn,
+.contact__delete__cancel-btn {
+  height: var(--btn-height--secondary);
+  padding: 0 1rem 0 1rem;
+} */
+
 @keyframes slide-in {
   from {
     transform: translateY(-80rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in--up {
+  from {
+    transform: translateY(80rem);
   }
   to {
     transform: translateY(0);
@@ -258,5 +321,14 @@ input:focus {
   }
   to {
     transform: translateY(-80rem);
+  }
+}
+
+@keyframes slide-out--right {
+  from {
+    transform: translateX(0rem);
+  }
+  to {
+    transform: translateX(100rem);
   }
 }
