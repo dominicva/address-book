@@ -1,3 +1,30 @@
+class Control {
+  constructor(hookEl) {
+    this.hookEl = hookEl;
+    this.tag = 'div';
+    this.className = 'control__container';
+    this.innerHTML = `
+      <h1 class="control__heading">address book</h1>
+      <button class="control__add-contact__btn"><i class="material-icons">add</i>Add contact</button>
+    `;
+  }
+
+  launchCreateContactModal() {
+    App.launchCreateContactModal();
+  }
+
+  render() {
+    const controlEl = document.createElement(this.tag);
+    controlEl.className = this.className;
+    controlEl.innerHTML = this.innerHTML;
+    const addContactBtn = controlEl.querySelector('button');
+    addContactBtn.addEventListener('click', () => {
+      this.launchCreateContactModal();
+    });
+    this.hookEl.append(controlEl);
+  }
+}
+
 class Contact {
   constructor(hookEl, { firstName, lastName, number, address }) {
     this.hookEl = hookEl;
@@ -42,29 +69,35 @@ class CreateContactModal {
       address: 'address',
     };
     this.innerHTML = `
-      <label for="fname">first name</label>
-      <input type="text" name="fname" id="fname" />
+      <h2 class="add-contact__form__heading">new contact</h2>
+      <form class="add-contact__form">
+        <label for="fname">first name</label>
+        <input type="text" name="fname" id="fname" />
 
-      <label for="lname">last name</label>
-      <input type="text" name="lname" id="lname" />  
-      
-      <label for="number">number</label>
-      <input type="text" name="number" id="number" />  
-      
-      <label for="address">address</label>
-      <input type="text" name="address" id="address" />     
-      <button class="add-contact__submit-btn" type="submit">
-        Create contact
-      </button>
+        <label for="lname">last name</label>
+        <input type="text" name="lname" id="lname" />  
+        
+        <label for="number">number</label>
+        <input type="text" name="number" id="number" />  
+        
+        <label for="address">address</label>
+        <input type="text" name="address" id="address" />
+        <div class="add-contact__btns__container">     
+          <button class="add-contact__submit-btn" type="submit">
+            Create contact
+          </button>
+          <button class="add-contact__cancel-btn">Cancel</button>
+        </div>
+      </form>
     `;
   }
 
   get inputValues() {
     return {
-      firstName: document.getElementById('fname').value,
-      lastName: document.getElementById('lname').value,
-      number: document.getElementById('number').value,
-      address: document.getElementById('address').value,
+      firstName: this.createContactModalEl.querySelector('#fname').value,
+      lastName: this.createContactModalEl.querySelector('#lname').value,
+      number: this.createContactModalEl.querySelector('#number').value,
+      address: this.createContactModalEl.querySelector('#address').value,
     };
   }
 
@@ -74,30 +107,49 @@ class CreateContactModal {
     }
   }
 
+  modalAnimateIn() {
+    this.createContactModalEl.style.animation =
+      'slide-in 0.5s ease-out forwards';
+  }
+
+  modalAnimateOut() {
+    this.createContactModalEl.style.animation =
+      'slide-out 0.5s ease-out forwards';
+  }
+
   addContactHandler(event) {
     event.preventDefault();
-
     const newContactData = this.inputValues;
-
     const contact = new Contact(this.hookEl, newContactData);
     contact.render();
-    this.clearInputValues();
 
-    // App.createContact(contact);
+    this.clearInputValues();
+    this.modalAnimateOut();
+  }
+
+  cancelCreateContactHandler() {
+    this.clearInputValues();
+    this.modalAnimateOut();
   }
 
   render() {
-    const createContactForm = document.createElement('form');
-    createContactForm.className = 'add-contact__form';
-    createContactForm.innerHTML = this.innerHTML;
-    const addContactBtn = createContactForm.querySelector(
+    this.createContactModalEl = document.createElement('div');
+    this.createContactModalEl.className = 'modal';
+    this.createContactModalEl.innerHTML = this.innerHTML;
+    const createContactBtn = this.createContactModalEl.querySelector(
       '.add-contact__submit-btn'
     );
-    addContactBtn.addEventListener('click', () => {
+    const cancelContactBtn = this.createContactModalEl.querySelector(
+      '.add-contact__cancel-btn'
+    );
+    createContactBtn.addEventListener('click', () => {
       this.addContactHandler(event);
     });
+    cancelContactBtn.addEventListener('click', () => {
+      this.cancelCreateContactHandler();
+    });
 
-    this.hookEl.append(createContactForm);
+    this.hookEl.append(this.createContactModalEl);
   }
 }
 
@@ -160,11 +212,23 @@ class SearchBar {
 
 class ContactList {}
 
-class App {}
+class App {
+  static createContactModal;
 
-const hook = document.getElementById('app');
-const createContactModal = new CreateContactModal(hook);
-createContactModal.render();
+  static init() {
+    const hook = document.getElementById('app');
+    const controlElement = new Control(hook);
+    controlElement.render();
+    this.createContactModal = new CreateContactModal(hook);
+    this.createContactModal.render();
+    const searchBar = new SearchBar(hook);
+    searchBar.render();
+  }
 
-const searchBar = new SearchBar(hook);
-searchBar.render();
+  static launchCreateContactModal() {
+    console.log('inside static addContact()');
+    this.createContactModal.modalAnimateIn();
+  }
+}
+
+App.init();
