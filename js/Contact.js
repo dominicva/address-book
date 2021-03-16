@@ -12,8 +12,21 @@ export default class Contact {
       <li>${this.number}</li>
       <li>${this.address}</li>
     </ul>
+    <button class="contact__delete-btn">Delete</button>
+    <button>Edit</button>
   `;
   }
+
+  handleEvent() {}
+
+  // deleteContact(element) {
+  //   element.remove();
+  // }
+
+  // initEventListener() {
+  //   // console.log();
+  //   this.htmlContent.addEventListener('click', this.deleteContact);
+  // }
 
   render(hookId) {
     const contactEl = document.createElement('div');

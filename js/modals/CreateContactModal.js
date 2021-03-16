@@ -33,7 +33,7 @@ export default class CreateContactModal {
 `;
   }
 
-  createContact = event => {
+  createContactHandler = event => {
     // arrow function to lexically scope 'this' assignment
     event.preventDefault();
 
@@ -41,6 +41,7 @@ export default class CreateContactModal {
     const contact = new Contact(data);
 
     contact.render(this.hookId);
+    // contact.initEventListener();
 
     this.clearInputValues();
   };
@@ -62,7 +63,16 @@ export default class CreateContactModal {
 
   initEventListener() {
     const createContactBtn = document.querySelector('.add-contact__submit-btn');
-    createContactBtn.addEventListener('click', this.createContact);
+    createContactBtn.addEventListener('click', this);
+  }
+
+  handleEvent(event) {
+    switch (event.type) {
+      case 'click':
+        console.log('made it into handleEvent');
+        this.createContactHandler(event);
+        break;
+    }
   }
 
   render() {
