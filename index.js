@@ -84,7 +84,7 @@ class CreateContactModal {
         <input type="text" name="address" id="address" />
         <div class="add-contact__btns__container">     
           <button class="add-contact__submit-btn" type="submit">
-            Create contact
+            Create
           </button>
           <button class="add-contact__cancel-btn">Cancel</button>
         </div>
@@ -113,8 +113,7 @@ class CreateContactModal {
   }
 
   modalAnimateOut() {
-    this.createContactModalEl.style.animation =
-      'slide-out 0.5s ease-out forwards';
+    this.createContactModalEl.style.animation = 'slide-out 0.5s ease forwards';
   }
 
   addContactHandler(event) {
@@ -127,7 +126,8 @@ class CreateContactModal {
     this.modalAnimateOut();
   }
 
-  cancelCreateContactHandler() {
+  cancelCreateContactHandler(event) {
+    event.preventDefault();
     this.clearInputValues();
     this.modalAnimateOut();
   }
@@ -146,7 +146,7 @@ class CreateContactModal {
       this.addContactHandler(event);
     });
     cancelContactBtn.addEventListener('click', () => {
-      this.cancelCreateContactHandler();
+      this.cancelCreateContactHandler(event);
     });
 
     this.hookEl.append(this.createContactModalEl);
@@ -178,7 +178,9 @@ class SearchBar {
     const searchTerm = this.searchInput;
 
     contactElements.forEach(contactEl => {
-      if (!contactEl.textContent.includes(searchTerm)) {
+      if (
+        !contactEl.textContent.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
         contactEl.style.display = 'none';
       }
     });
@@ -226,7 +228,6 @@ class App {
   }
 
   static launchCreateContactModal() {
-    console.log('inside static addContact()');
     this.createContactModal.modalAnimateIn();
   }
 }
