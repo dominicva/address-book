@@ -13,13 +13,22 @@ export default class CreateContactModal extends Modal {
     this.initEventListeners();
   }
 
+  userInputValid(contactData) {
+    return Object.values(contactData).join(''); // contact contains something
+  }
+
   addContactHandler(event) {
     event.preventDefault();
-    const newContactData = this.form.inputValues;
-    const contact = new Contact(newContactData);
-    new ContactComponent(this.renderHook, 'contact', contact);
-    this.form.clearInputValues();
-    this.modal.modalAnimateOut();
+    const userInput = this.form.inputValues;
+    if (this.userInputValid(userInput)) {
+      const contact = new Contact(userInput);
+      new ContactComponent(this.renderHook, 'contact', contact);
+      this.form.clearInputValues();
+      this.modal.modalAnimateOut();
+    } else {
+      alert('Please enter some contact information');
+      return;
+    }
   }
 
   cancelCreateContactHandler(event) {
