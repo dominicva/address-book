@@ -4,6 +4,7 @@ export default class Component {
     this.tag = 'div';
     this.className = className;
     this.innerHTML;
+    this.domEl;
   }
 
   initEventListeners() {} // see subclasses

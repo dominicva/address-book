@@ -17,10 +17,6 @@ export default class ContactComponent extends Component {
       <div class="contact__field address">${this.address}</div>
       <button class="contact__delete-btn material-icons">delete</button>
     `;
-    this.confirmDeleteModal = new ConfirmDeleteModal(
-      this.renderHook,
-      'modal confirm-delete'
-    );
     this.render();
   }
 
@@ -29,14 +25,9 @@ export default class ContactComponent extends Component {
   }
 
   confirmHandler(deletionEvent) {
-    this.confirmDeleteModal.modalAnimateOut();
     setTimeout(() => {
       App.deleteContact(deletionEvent);
     }, 600);
-  }
-
-  cancelHandler() {
-    this.confirmDeleteModal.modalAnimateOut();
   }
 
   // overriden from super (Component) class. Called on render by Component.
@@ -44,19 +35,6 @@ export default class ContactComponent extends Component {
     const deleteContactBtn = this.domEl.querySelector('.contact__delete-btn');
     deleteContactBtn.addEventListener('click', () => {
       this.deleteContactHandler(event); // pass event to track specific contact
-    });
-    const confirmDeleteBtn = this.confirmDeleteModal.domEl.querySelector(
-      '.contact__delete__confirm-btn'
-    );
-    const cancelDeleteBtn = this.confirmDeleteModal.domEl.querySelector(
-      '.contact__delete__cancel-btn'
-    );
-
-    confirmDeleteBtn.addEventListener('click', deletionEvent => {
-      this.confirmHandler(deletionEvent);
-    });
-    cancelDeleteBtn.addEventListener('click', () => {
-      this.cancelHandler();
     });
   }
 }

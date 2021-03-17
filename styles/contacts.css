@@ -2,7 +2,7 @@
   font-family: var(--monospace);
   text-transform: capitalize;
   color: var(--pure-white);
-  padding: 1rem 0 0 1rem;
+  padding-top: 1rem;
   margin: 2rem auto 0 auto;
   max-width: var(--input-max-width);
 }
@@ -10,7 +10,7 @@
 .add-contact__form {
   display: flex;
   flex-direction: column;
-  max-width: var(--input-max-width);
+  max-width: 100%;
   margin: 0 auto var(--section-separator) auto;
   padding: 1rem;
   transform: translateY(-80rem);
@@ -48,6 +48,7 @@
   width: 12rem;
   border-radius: 0.1rem;
   margin-right: 1rem;
+  margin-bottom: var(--grouped-items-margin-l);
   background-color: transparent;
   border: 2px solid var(--pure-white);
   color: var(--pure-white);
@@ -79,11 +80,6 @@
   transform: translateY(80rem);
   animation: slide-in--up 0.5s ease-out 0.25s forwards;
 }
-
-/* .contact.slide-out--right {
-  transition: transform 0.5s ease;
-  transform: translateX(100rem);
-} */
 
 .contact__field {
   font-family: var(--monospace);
