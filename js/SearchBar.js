@@ -7,10 +7,10 @@ export default class SearchBar extends Component {
       <input class="search__input" type="text" name="search" id="search" placeholder="Search contacts" />
       <div class="search__btns__container">
         <button class="search__btn">Search</button>
-        <button class="search__btn--cancel">Cancel</button>
       </div>
     `;
     this.render();
+    this.searchBtn;
   }
 
   get searchInput() {
@@ -21,12 +21,19 @@ export default class SearchBar extends Component {
     this.domEl.querySelector('#search').value = value;
   }
 
+  get btnText() {
+    return this.searchBtn.textContent;
+  }
+
+  set btnText(text) {
+    this.searchBtn.textContent = text;
+  }
+
   get contactElementsArray() {
     return Array.from(document.querySelectorAll('.contact'));
   }
 
-  searchHandler() {
-    const searchTerm = this.searchInput.toLowerCase();
+  filterContacts(searchTerm) {
     this.contactElementsArray.forEach(contactEl => {
       if (!contactEl.textContent.toLowerCase().includes(searchTerm)) {
         contactEl.style.display = 'none';
@@ -34,21 +41,30 @@ export default class SearchBar extends Component {
     });
   }
 
+  searchHandler() {
+    if (this.btnText === 'Search') {
+      const searchTerm = this.searchInput.toLowerCase();
+      this.filterContacts(searchTerm);
+      this.btnText = 'Cancel';
+      this.searchBtn.style.border = '4px solid var(--primary-light';
+    } else if (this.btnText === 'Cancel') {
+      this.cancelSearchHandler();
+    }
+  }
+
   cancelSearchHandler() {
     this.contactElementsArray.forEach(
       contactEl => (contactEl.style.display = 'block')
     );
     this.searchInput = '';
+    this.btnText = 'Search';
+    this.searchBtn.style.border = 'none';
   }
 
   initEventListeners() {
-    const searchBtn = this.domEl.querySelector('.search__btn');
-    const cancelBtn = this.domEl.querySelector('.search__btn--cancel');
-    searchBtn.addEventListener('click', () => {
+    this.searchBtn = this.domEl.querySelector('.search__btn');
+    this.searchBtn.addEventListener('click', () => {
       this.searchHandler();
-    });
-    cancelBtn.addEventListener('click', () => {
-      this.cancelSearchHandler();
     });
   }
 }
