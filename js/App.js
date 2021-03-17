@@ -1,5 +1,3 @@
-import Component from './Component';
-import Contact from './Contact';
 import Control from './Control';
 import CreateContactModal from './CreateContactModal';
 import SearchBar from './SearchBar';
@@ -15,7 +13,7 @@ export default class App {
     controlElement.render();
     controlElement.initEventListeners();
 
-    this.createContactModal = new CreateContactModal(hook);
+    this.createContactModal = new CreateContactModal(hook, 'div', 'modal');
     this.createContactModal.render();
     this.deleteContactModal = new ConfirmDeleteModal(hook);
     this.deleteContactModal.render();

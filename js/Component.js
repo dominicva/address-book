@@ -6,6 +6,8 @@ export default class Component {
     this.innerHTML;
   }
 
+  initEventListeners() {} // see subclasses
+
   render() {
     this.domEl = document.createElement(this.tag);
 
@@ -27,6 +29,7 @@ export default class Component {
     }
 
     this.renderHook.append(this.domEl);
+    this.initEventListeners();
     return this.domEl;
   }
 }

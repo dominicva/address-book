@@ -1,8 +1,8 @@
 import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 export default class Contact {
-  constructor(hookEl, { firstName, lastName, number, address }) {
-    this.hookEl = hookEl;
+  constructor({ firstName, lastName, number, address }) {
+    this.hookEl = document.getElementById('app');
     this.firstName = firstName;
     this.lastName = lastName;
     this.number = number;
