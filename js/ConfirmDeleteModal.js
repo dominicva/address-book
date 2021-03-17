@@ -16,7 +16,7 @@ export default class ConfirmDeleteModal extends Modal {
     this.modalAnimateOut();
     setTimeout(() => {
       App.deleteContact();
-    }, 600);
+    }, 500);
   }
 
   cancelHandler() {

@@ -18,7 +18,10 @@ export default class App {
   }
 
   static deleteContact() {
-    this.deletionEvent.target.parentElement.remove();
+    this.deletionEvent.target.style.transform = 'translateX(80rem)';
+    setTimeout(() => {
+      this.deletionEvent.target.parentElement.remove();
+    }, 600);
   }
 
   static init() {
