@@ -10,19 +10,19 @@ export default class App {
   static init() {
     const hook = document.getElementById('app');
     const controlElement = new Control(hook, 'div', 'control__container');
-    controlElement.render();
-    controlElement.initEventListeners();
+    // controlElement.render();
+    // controlElement.initEventListeners();
 
     this.createContactModal = new CreateContactModal(hook, 'div', 'modal');
-    this.createContactModal.render();
-    this.deleteContactModal = new ConfirmDeleteModal(hook);
-    this.deleteContactModal.render();
+    // this.createContactModal.render();
+    // this.deleteContactModal = new ConfirmDeleteModal(hook);
+    // this.deleteContactModal.render();
     const searchBar = new SearchBar(hook);
-    searchBar.render();
+    // searchBar.render();
   }
 
   static launchCreateContactModal() {
-    this.createContactModal.modalAnimateIn();
+    this.createContactModal.modal.modalAnimateIn();
   }
 
   static deleteContact(event) {

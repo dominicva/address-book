@@ -14,20 +14,19 @@ export default class Component {
     if (this.className) {
       this.domEl.className = this.className;
     }
-    if (this.attribute && this.attributeValue) {
-      this.domEl.setAttribute(this.attribute, this.attributeValue);
-    }
+    // if (this.attribute && this.attributeValue) {
+    //   this.domEl.setAttribute(this.attribute, this.attributeValue);
+    // }
     if (this.innerHTML) {
       this.domEl.innerHTML = this.innerHTML;
     }
-    if (this.eventProps) {
-      for (const prop in this.eventProps) {
-        prop.addEventListener(prop['eventType'], () => {
-          prop['callback']();
-        });
-      }
-    }
-
+    // if (this.eventProps) {
+    //   for (const prop in this.eventProps) {
+    //     prop.addEventListener(prop['eventType'], () => {
+    //       prop['callback']();
+    //     });
+    //   }
+    // }
     this.renderHook.append(this.domEl);
     this.initEventListeners();
     return this.domEl;

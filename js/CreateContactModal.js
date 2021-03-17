@@ -1,15 +1,45 @@
 // import Component from './Component';
 import Modal from './Modal';
-// import ContactFrom from './ContactForm';
-// import Contact from './Contact';
+import ContactForm from './ContactForm';
+import Contact from './Contact';
 
 export default class CreateContactModal extends Modal {
-  constructor(hookEl, tag, className) {
-    super(hookEl, tag, className);
-    this.modal = new Modal(hookEl, tag, className);
+  constructor(renderHook, tag, className) {
+    super(renderHook, tag, className);
+    this.modal = new Modal(renderHook, tag, className);
     this.modal.render();
     this.form = new ContactForm(this.modal.domEl, 'div', 'add-contact__form');
     this.form.render();
+    this.initEventListeners();
+  }
+
+  addContactHandler(event) {
+    event.preventDefault();
+    const newContactData = this.form.inputValues;
+    const contact = new Contact(newContactData);
+    // contact.render();
+
+    this.clearInputValues();
+    this.modal.modalAnimateOut();
+  }
+
+  cancelCreateContactHandler(event) {
+    event.preventDefault();
+    this.form.clearInputValues();
+    this.modal.modalAnimateOut();
+  }
+
+  initEventListeners() {
+    const createBtn = this.form.domEl.querySelector('.add-contact__submit-btn');
+    const cancelBtn = this.form.domEl.querySelector('.add-contact__cancel-btn');
+
+    createBtn.addEventListener('click', () => {
+      this.addContactHandler(event);
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      this.cancelCreateContactHandler(event);
+    });
   }
 }
 

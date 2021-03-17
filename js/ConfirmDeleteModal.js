@@ -1,58 +1,84 @@
 import App from './App';
+import Modal from './Modal';
+// import ConfirmDeleteComponent from './ConfirmDeleteComponent';
+// import Component from './Component';
 
-export default class ConfirmDeleteModal {
-  constructor(hookEl) {
-    this.hookEl = hookEl;
+export default class ConfirmDeleteModal extends Modal {
+  constructor(renderHook, tag, className) {
+    super(renderHook, tag, className);
     this.innerHTML = `
       <h3 class="contact__delete__confirm__heading">Are you sure?</h3>
       <button class="contact__delete__confirm-btn">Delete</button>
       <button class="contact__delete__cancel-btn">Cancel</button>
     `;
+    this.render();
   }
 
-  animateIn() {
-    this.confirmDeleteModalEl.style.animation =
-      'slide-in 0.35s ease-out forwards';
-  }
-
-  animateOut() {
-    this.confirmDeleteModalEl.style.animation =
-      'slide-out 0.35s ease-in forwards';
-  }
-
-  confirmDeleteHandler(deletionEvent) {
-    this.confirmDeleteModalEl.style =
-      'animation-name: slide-out; animation-duration: 0.25s; animation-timing-function: ease';
-
+  confirmHandler(deletionEvent) {
+    this.modal.modalAnimateOut();
     setTimeout(() => {
       App.deleteContact(deletionEvent);
     }, 600);
   }
 
-  cancelDeleteHandler(event) {
-    this.confirmDeleteModalEl.style =
-      'animation-name: slide-out; animation-duration: 0.25s; animation-timing-function: ease';
+  cancelHandler() {
+    this.modalAnimateOut();
   }
 
-  render(deletionEvent) {
-    this.confirmDeleteModalEl = document.createElement('div');
-    this.confirmDeleteModalEl.className = 'modal';
-    this.confirmDeleteModalEl.setAttribute('id', 'confirm-delete');
-    this.confirmDeleteModalEl.innerHTML = this.innerHTML;
-    const confirmDeleteBtn = this.confirmDeleteModalEl.querySelector(
+  initEventListeners() {
+    const confirmDeleteBtn = this.domEl.querySelector(
       '.contact__delete__confirm-btn'
     );
-    const cancelDeleteBtn = this.confirmDeleteModalEl.querySelector(
+    const cancelDeleteBtn = this.domEl.querySelector(
       '.contact__delete__cancel-btn'
     );
 
     confirmDeleteBtn.addEventListener('click', () => {
-      this.confirmDeleteHandler(deletionEvent);
+      this.confirmHandler(deletionEvent);
     });
     cancelDeleteBtn.addEventListener('click', () => {
-      this.cancelDeleteHandler();
+      this.cancelHandler();
     });
-
-    this.hookEl.append(this.confirmDeleteModalEl);
   }
 }
+
+// export default class ConfirmDeleteModal extends Modal {
+//   constructor(renderHook, tag, className) {
+//     super(renderHook, tag, className);
+//     this.modal = new Modal(renderHook, tag, className);
+//     this.modal.render();
+//     this.confirmComponent = new ConfirmDeleteComponent(
+//       this.modal.domEl,
+//       'div',
+//       'modal confirm-delete'
+//     );
+//     this.confirmComponent.render();
+//   }
+
+//   confirmHandler(deletionEvent) {
+//     this.modal.modalAnimateOut();
+//     setTimeout(() => {
+//       App.deleteContact(deletionEvent);
+//     }, 600);
+//   }
+
+//   cancelHandler() {
+//     this.modal.modalAnimateOut();
+//   }
+
+//   initEventListeners() {
+//     const confirmDeleteBtn = this.confirmComponent.domEl.querySelector(
+//       '.contact__delete__confirm-btn'
+//     );
+//     const cancelDeleteBtn = this.confirmComponent.domEl.querySelector(
+//       '.contact__delete__cancel-btn'
+//     );
+
+//     confirmDeleteBtn.addEventListener('click', () => {
+//       this.confirmHandler(deletionEvent);
+//     });
+//     cancelDeleteBtn.addEventListener('click', () => {
+//       this.cancelHandler();
+//     });
+//   }
+// }

@@ -1,8 +1,9 @@
 import Component from './Component';
+import Contact from './Contact';
 
 export default class ContactForm extends Component {
-  constructor(hookEl, tag, className) {
-    super(hookEl, tag, className);
+  constructor(renderHook, tag, className) {
+    super(renderHook, tag, className);
     this.innerHTML = `
       <h2 class="add-contact__form__heading">new contact</h2>
       <form class="add-contact__form">
@@ -48,19 +49,34 @@ export default class ContactForm extends Component {
     }
   }
 
-  addContactHandler(event) {
-    event.preventDefault();
-    const newContactData = this.inputValues;
-    const contact = new Contact(newContactData);
-    contact.render();
+  // addContactHandler(event) {
+  //   console.log("I'm here");
+  //   event.preventDefault();
+  //   const newContactData = this.inputValues;
+  //   const contact = new Contact(newContactData);
+  //   // contact.render();
 
-    this.clearInputValues();
-    this.modalAnimateOut();
-  }
+  //   this.clearInputValues();
+  //   // this.modal.modalAnimateOut();
+  // }
 
-  cancelCreateContactHandler(event) {
-    event.preventDefault();
-    this.clearInputValues();
-    this.modalAnimateOut();
-  }
+  // cancelCreateContactHandler(event) {
+  //   console.log('here');
+  //   event.preventDefault();
+  //   this.clearInputValues();
+  //   this.domEl.modalAnimateOut();
+  // }
+
+  // initEventListeners() {
+  //   const createBtn = this.domEl.querySelector('.add-contact__submit-btn');
+  //   // const cancelBtn = this.domEl.querySelector('.add-contact__cancel-btn');
+
+  //   createBtn.addEventListener('click', () => {
+  //     this.addContactHandler(event);
+  //   });
+
+  //   cancelBtn.addEventListener('click', () => {
+  //     this.cancelCreateContactHandler(event);
+  //   });
+  // }
 }

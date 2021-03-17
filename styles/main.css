@@ -275,7 +275,7 @@ input:focus {
   border: none;
 }
 
-.modal#confirm-delete {
+.modal.confirm-delete {
   text-align: center;
   padding: 10rem 2rem 12rem 2rem;
 }
