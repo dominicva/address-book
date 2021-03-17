@@ -1,10 +1,8 @@
 import Component from './Component';
 
 export default class Modal extends Component {
-  constructor(renderHook, tag, className) {
-    super(renderHook, tag, className);
-    this.tag = 'div';
-    // this.initEventListeners();
+  constructor(renderHook, className) {
+    super(renderHook, className);
   }
 
   modalAnimateIn() {

@@ -1,8 +1,8 @@
 import Component from './Component';
 
 export default class SearchBar extends Component {
-  constructor(renderHook, tag, className) {
-    super(renderHook, tag, className);
+  constructor(renderHook, className) {
+    super(renderHook, className);
     this.innerHTML = `
       <input class="search__input" type="text" name="search" id="search" placeholder="Search contacts" />
       <div class="search__btns__container">
@@ -26,10 +26,7 @@ export default class SearchBar extends Component {
   }
 
   searchHandler() {
-    // const contactElements = Array.from(document.querySelectorAll('.contact'));
-    // const contactElsArr = this.contactElementsArray;
     const searchTerm = this.searchInput.toLowerCase();
-
     this.contactElementsArray.forEach(contactEl => {
       if (!contactEl.textContent.toLowerCase().includes(searchTerm)) {
         contactEl.style.display = 'none';
@@ -38,8 +35,6 @@ export default class SearchBar extends Component {
   }
 
   cancelSearchHandler() {
-    // const contactElements = Array.from(document.querySelectorAll('.contact'));
-    // const contactElsArr = this.contactElementsArray;
     this.contactElementsArray.forEach(
       contactEl => (contactEl.style.display = 'block')
     );
@@ -56,22 +51,4 @@ export default class SearchBar extends Component {
       this.cancelSearchHandler();
     });
   }
-
-  // render() {
-  //   const searchBarEl = document.createElement('div');
-  //   searchBarEl.className = 'search__container';
-  //   searchBarEl.innerHTML = this.innerHTML;
-
-  //   // set up event listeners
-  //   const searchBtn = searchBarEl.querySelector('.search__btn');
-  //   const cancelBtn = searchBarEl.querySelector('.search__btn--cancel');
-  //   searchBtn.addEventListener('click', () => {
-  //     this.searchHandler();
-  //   });
-  //   cancelBtn.addEventListener('click', () => {
-  //     this.cancelSearchHandler();
-  //   });
-
-  //   this.hookEl.append(searchBarEl);
-  // }
 }

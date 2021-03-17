@@ -8,25 +8,6 @@ export default class App {
   static confirmDeleteModal;
   static deletionEvent;
 
-  static init() {
-    const hook = document.getElementById('app');
-    const controlElement = new Control(hook, 'div', 'control__container');
-    // controlElement.render();
-    // controlElement.initEventListeners();
-
-    this.createContactModal = new CreateContactModal(hook, 'div', 'modal');
-    this.confirmDeleteModal = new ConfirmDeleteModal(
-      hook,
-      'div',
-      'modal confirm-delete'
-    );
-    // this.createContactModal.render();
-    // this.deleteContactModal = new ConfirmDeleteModal(hook);
-    // this.deleteContactModal.render();
-    const searchBar = new SearchBar(hook);
-    // searchBar.render();
-  }
-
   static launchCreateContactModal() {
     this.createContactModal.modal.modalAnimateIn();
   }
@@ -38,5 +19,17 @@ export default class App {
 
   static deleteContact() {
     this.deletionEvent.target.parentElement.remove();
+  }
+
+  static init() {
+    const hook = document.getElementById('app');
+    new Control(hook, 'control__container');
+    new SearchBar(hook, 'search__container');
+
+    this.createContactModal = new CreateContactModal(hook, 'modal');
+    this.confirmDeleteModal = new ConfirmDeleteModal(
+      hook,
+      'modal confirm-delete'
+    );
   }
 }

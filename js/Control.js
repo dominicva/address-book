@@ -2,8 +2,8 @@ import Component from './Component';
 import App from './App';
 
 export default class Control extends Component {
-  constructor(renderHook, tag, className) {
-    super(renderHook, tag, className);
+  constructor(renderHook, className) {
+    super(renderHook, className);
     this.innerHTML = `
       <h1 class="control__heading">address book</h1>
       <button class="control__add-contact__btn"><i class="material-icons">add</i>Add contact</button>

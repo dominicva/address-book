@@ -61,6 +61,7 @@ input:focus {
   max-width: 40rem;
   margin: auto;
   margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 
 .control__container {

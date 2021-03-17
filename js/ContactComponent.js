@@ -3,8 +3,8 @@ import ConfirmDeleteModal from './ConfirmDeleteModal';
 import App from './App';
 
 export default class ContactComponent extends Component {
-  constructor(renderHook, tag, className, contactData) {
-    super(renderHook, tag, className);
+  constructor(renderHook, className, contactData) {
+    super(renderHook, className);
     this.renderHook = document.getElementById('app');
     this.firstName = contactData.firstName;
     this.lastName = contactData.lastName;
@@ -19,25 +19,16 @@ export default class ContactComponent extends Component {
     `;
     this.confirmDeleteModal = new ConfirmDeleteModal(
       this.renderHook,
-      'div',
       'modal confirm-delete'
     );
     this.render();
   }
 
   deleteContactHandler(event) {
-    // this.confirmDeleteModal = new ConfirmDeleteModal(
-    //   this.renderHook,
-    //   'div',
-    //   'modal confirm-delete'
-    // );
-    // confirmationModal.render(event);
-    // this.confirmDeleteModal.modalAnimateIn();
     App.launchConfirmDeleteModal(event);
   }
 
   confirmHandler(deletionEvent) {
-    console.log(deletionEvent.target.parentElement);
     this.confirmDeleteModal.modalAnimateOut();
     setTimeout(() => {
       App.deleteContact(deletionEvent);
