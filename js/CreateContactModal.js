@@ -2,6 +2,7 @@
 import Modal from './Modal';
 import ContactForm from './ContactForm';
 import Contact from './Contact';
+import ContactComponent from './ContactComponent';
 
 export default class CreateContactModal extends Modal {
   constructor(renderHook, tag, className) {
@@ -17,9 +18,14 @@ export default class CreateContactModal extends Modal {
     event.preventDefault();
     const newContactData = this.form.inputValues;
     const contact = new Contact(newContactData);
+    const contactComponent = new ContactComponent(
+      this.renderHook,
+      'div',
+      'contact',
+      contact
+    );
     // contact.render();
-
-    this.clearInputValues();
+    this.form.clearInputValues();
     this.modal.modalAnimateOut();
   }
 
@@ -31,12 +37,11 @@ export default class CreateContactModal extends Modal {
 
   initEventListeners() {
     const createBtn = this.form.domEl.querySelector('.add-contact__submit-btn');
-    const cancelBtn = this.form.domEl.querySelector('.add-contact__cancel-btn');
-
     createBtn.addEventListener('click', () => {
       this.addContactHandler(event);
     });
 
+    const cancelBtn = this.form.domEl.querySelector('.add-contact__cancel-btn');
     cancelBtn.addEventListener('click', () => {
       this.cancelCreateContactHandler(event);
     });

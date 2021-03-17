@@ -1,5 +1,6 @@
 import Component from './Component';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import App from './App';
 
 export default class ContactComponent extends Component {
   constructor(renderHook, tag, className, contactData) {
@@ -16,17 +17,35 @@ export default class ContactComponent extends Component {
       <div class="contact__field address">${this.address}</div>
       <button class="contact__delete-btn material-icons">delete</button>
     `;
-    this.render();
-  }
-
-  deleteContactHandler(event) {
-    const confirmationModal = new ConfirmDeleteModal(
+    this.confirmDeleteModal = new ConfirmDeleteModal(
       this.renderHook,
       'div',
       'modal confirm-delete'
     );
+    this.render();
+  }
+
+  deleteContactHandler(event) {
+    // this.confirmDeleteModal = new ConfirmDeleteModal(
+    //   this.renderHook,
+    //   'div',
+    //   'modal confirm-delete'
+    // );
     // confirmationModal.render(event);
-    confirmationModal.modalAnimateIn();
+    // this.confirmDeleteModal.modalAnimateIn();
+    App.launchConfirmDeleteModal(event);
+  }
+
+  confirmHandler(deletionEvent) {
+    console.log(deletionEvent.target.parentElement);
+    this.confirmDeleteModal.modalAnimateOut();
+    setTimeout(() => {
+      App.deleteContact(deletionEvent);
+    }, 600);
+  }
+
+  cancelHandler() {
+    this.confirmDeleteModal.modalAnimateOut();
   }
 
   // overriden from super (Component) class. Called on render by Component.
@@ -34,6 +53,19 @@ export default class ContactComponent extends Component {
     const deleteContactBtn = this.domEl.querySelector('.contact__delete-btn');
     deleteContactBtn.addEventListener('click', () => {
       this.deleteContactHandler(event); // pass event to track specific contact
+    });
+    const confirmDeleteBtn = this.confirmDeleteModal.domEl.querySelector(
+      '.contact__delete__confirm-btn'
+    );
+    const cancelDeleteBtn = this.confirmDeleteModal.domEl.querySelector(
+      '.contact__delete__cancel-btn'
+    );
+
+    confirmDeleteBtn.addEventListener('click', deletionEvent => {
+      this.confirmHandler(deletionEvent);
+    });
+    cancelDeleteBtn.addEventListener('click', () => {
+      this.cancelHandler();
     });
   }
 }

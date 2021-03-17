@@ -5,7 +5,8 @@ import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 export default class App {
   static createContactModal;
-  static deleteContactModal;
+  static confirmDeleteModal;
+  static deletionEvent;
 
   static init() {
     const hook = document.getElementById('app');
@@ -14,6 +15,11 @@ export default class App {
     // controlElement.initEventListeners();
 
     this.createContactModal = new CreateContactModal(hook, 'div', 'modal');
+    this.confirmDeleteModal = new ConfirmDeleteModal(
+      hook,
+      'div',
+      'modal confirm-delete'
+    );
     // this.createContactModal.render();
     // this.deleteContactModal = new ConfirmDeleteModal(hook);
     // this.deleteContactModal.render();
@@ -25,7 +31,12 @@ export default class App {
     this.createContactModal.modal.modalAnimateIn();
   }
 
-  static deleteContact(event) {
-    event.target.parentElement.remove();
+  static launchConfirmDeleteModal(deletionEvent) {
+    this.deletionEvent = deletionEvent;
+    this.confirmDeleteModal.modalAnimateIn();
+  }
+
+  static deleteContact() {
+    this.deletionEvent.target.parentElement.remove();
   }
 }

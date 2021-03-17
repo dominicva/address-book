@@ -14,10 +14,11 @@ export default class ConfirmDeleteModal extends Modal {
     this.render();
   }
 
-  confirmHandler(deletionEvent) {
-    this.modal.modalAnimateOut();
+  confirmHandler() {
+    // console.log(deletionEvent.target.parentElement);
+    this.modalAnimateOut();
     setTimeout(() => {
-      App.deleteContact(deletionEvent);
+      App.deleteContact();
     }, 600);
   }
 
@@ -34,7 +35,7 @@ export default class ConfirmDeleteModal extends Modal {
     );
 
     confirmDeleteBtn.addEventListener('click', () => {
-      this.confirmHandler(deletionEvent);
+      this.confirmHandler();
     });
     cancelDeleteBtn.addEventListener('click', () => {
       this.cancelHandler();
