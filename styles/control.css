@@ -1,0 +1,22 @@
+.control__container {
+  margin-bottom: var(--section-separator);
+}
+
+.control__heading {
+  color: var(--pure-white);
+  font-family: var(--monospace);
+  font-size: 2rem;
+  text-transform: capitalize;
+  margin-bottom: var(--distanced-items-margin);
+}
+
+.control__add-contact__btn {
+  height: var(--btn-height);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.control__add-contact__btn:hover {
+  border-radius: 2rem;
+}

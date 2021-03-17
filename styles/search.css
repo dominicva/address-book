@@ -1,0 +1,35 @@
+.search__container {
+  width: 100%;
+  margin: auto;
+  margin-bottom: var(--section-separator);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.search__input {
+  height: var(--input-height);
+  width: 100%;
+  max-width: 26rem;
+  margin-bottom: var(--grouped-items-margin-l);
+}
+
+.search__btns__container {
+  display: flex;
+  width: 100%;
+  height: var(--btn-height--secondary);
+}
+
+.search__btn {
+  margin-right: 1rem;
+}
+
+.search__btn,
+.search__btn--cancel {
+  width: 8rem;
+}
+
+.search__btn:hover,
+.search__btn--cancel:hover {
+  border-radius: 1.25rem;
+}

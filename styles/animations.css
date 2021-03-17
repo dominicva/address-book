@@ -1,0 +1,35 @@
+@keyframes slide-in {
+  from {
+    transform: translateY(-80rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in--up {
+  from {
+    transform: translateY(80rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0rem);
+  }
+  to {
+    transform: translateY(-80rem);
+  }
+}
+
+@keyframes slide-out--right {
+  from {
+    transform: translateX(0rem);
+  }
+  to {
+    transform: translateX(100rem);
+  }
+}

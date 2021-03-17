@@ -1,0 +1,148 @@
+.add-contact__form__heading {
+  font-family: var(--monospace);
+  text-transform: capitalize;
+  color: var(--pure-white);
+  padding: 1rem 0 0 1rem;
+  margin: 2rem auto 0 auto;
+  max-width: var(--input-max-width);
+}
+
+.add-contact__form {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--input-max-width);
+  margin: 0 auto var(--section-separator) auto;
+  padding: 1rem;
+  transform: translateY(-80rem);
+  transition: translateX 0.5s ease;
+  animation: slide-in 1s ease-out forwards;
+}
+
+.add-contact__form > label {
+  align-self: flex-start;
+  color: var(--pure-white);
+}
+
+.add-contact__form > label::first-letter {
+  text-transform: uppercase;
+}
+
+.add-contact__form > input {
+  height: var(--input-height);
+  margin-bottom: var(--grouped-items-margin-l);
+}
+
+.add-contact__form > input:last-of-type {
+  margin-bottom: var(--distanced-items-margin);
+}
+
+.add-contact__btns__container {
+  display: flex;
+}
+
+.add-contact__submit-btn,
+.add-contact__cancel-btn,
+.contact__delete__confirm-btn,
+.contact__delete__cancel-btn {
+  height: var(--btn-height);
+  width: 12rem;
+  border-radius: 0.1rem;
+  margin-right: 1rem;
+  background-color: transparent;
+  border: 2px solid var(--pure-white);
+  color: var(--pure-white);
+}
+
+.add-contact__submit-btn:hover,
+.contact__delete__cancel-btn:hover {
+  background-color: var(--pure-white);
+  color: var(--primary-dark);
+}
+
+.add-contact__cancel-btn:hover {
+  opacity: 0.87;
+}
+
+.add-contact__submit-btn:hover,
+.add-contact__cancel-btn:hover,
+.contact__delete__confirm-btn:hover,
+.contact__delete__cancel-btn:hover {
+  border-radius: 1.5rem;
+}
+
+.contact {
+  display: grid;
+  justify-items: flex-start;
+  padding: 2rem 1rem 1.5rem 1rem;
+  border: 1px solid var(--pure-white);
+  color: var(--pure-white);
+  transform: translateY(80rem);
+  animation: slide-in--up 0.5s ease-out 0.25s forwards;
+}
+
+.contact.slide-out--right {
+  transition: transform 0.5s ease;
+  transform: translateX(100rem);
+}
+
+.contact__field {
+  font-family: var(--monospace);
+  margin-bottom: var(--grouped-items-margin-s);
+}
+
+.contact__field.first-name,
+.contact__field.last-name {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.contact__field.last-name {
+  margin-bottom: var(--grouped-items-margin-l);
+}
+
+.contact__field.number,
+.contact__field.address {
+  opacity: 0.87;
+}
+
+.contact__field.number {
+  letter-spacing: 0.5px;
+}
+
+.contact__field.address {
+  max-width: 16rem;
+  margin-bottom: var(--distanced-items-margin);
+}
+
+.contact__delete-btn {
+  height: var(--btn-height--secondary);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: transparent;
+  color: var(--pure-white);
+  border: 1.5px solid var(--pure-white);
+  display: flex;
+  align-items: center;
+  transition: border radius 0.5s ease-out, border 1s ease;
+}
+
+.contact__delete-btn.material-icons {
+  margin: 0;
+}
+
+.contact__delete-btn:hover {
+  border-radius: 1.5rem;
+  border: none;
+}
+
+.modal.confirm-delete {
+  text-align: center;
+  padding: 10rem 2rem 12rem 2rem;
+}
+
+.contact__delete__confirm__heading {
+  color: var(--pure-white);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
