@@ -10,9 +10,9 @@ Practicing JS ES6 OOP including
 ## Run on your local machine
 
 1. Get the code
-2. Run npm install in the terminal (parcel-bundler is the only dependency)
-3. Run parcel index.html to get dev build and localhost dev server
-   That's it :)
+2. If you don't have Parcel installed globally, run npm install -g parcel-bundler
+3. Run npm install
+4. Run parcel index.html to get dev build and localhost dev server. That's it :)
 
 ## A few details
 
